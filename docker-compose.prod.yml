@@ -1,0 +1,23 @@
+version: "3.3"
+services:
+  pyrus:
+      build: ./app
+      restart: always
+      container_name: pyrus
+      env_file:
+        - app/env/production.env
+      volumes:
+        - ./app:/app
+      links:
+          - redis
+      ports:
+          - "5000:5000"
+  redis:
+    build: ./redis
+    restart: always
+    container_name: redis
+    volumes:
+        - ./redis/config/redis.conf:/usr/local/etc/redis/redis.conf
+        - ./redis/logs:/var/log/redis/
+    ports:
+        - "6379:6379"

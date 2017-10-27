@@ -1,0 +1,21 @@
+doc-warnings: false
+test-warnings: false
+strictness: veryhigh
+max-line-length: 120
+pep8:
+  full: true
+  disable:
+    - N813
+
+autodetect: true
+requirements:
+  - app/requirements.txt
+  - app/requirements-dev.txt
+ignore-paths:
+  - apidoc
+  - bin
+  - redis
+python-targets:
+  - 3
+uses:
+  - flask

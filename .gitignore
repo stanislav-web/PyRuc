@@ -1,0 +1,7 @@
+.idea/
+.coverage
+*__pycache__/**
+*.pyc
+PyRuc.egg-info/
+/.coverage
+/apidoc/
