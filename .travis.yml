@@ -14,6 +14,7 @@ cache:
 before_install:
   - python --version
   - uname -a
+  - cd app/
 
 install:
   - pip install -r requirements.txt
@@ -25,7 +26,7 @@ notifications:
     on_failure: email
 
 script:
-  - cd app/ && coverage run setup.py test
+  - coverage run setup.py test
 after_script:
   - coverage report
 after_success:
