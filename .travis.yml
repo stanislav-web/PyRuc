@@ -4,7 +4,6 @@ os:
   - linux
 
 python:
-  - 3.4
   - 3.5
   - 3.6
 
@@ -19,11 +18,11 @@ env:
   - APPLICATION_REG_CODE_TTL=10
   - APPLICATION_RESTORE_CODE_TTL=10
   - APPLICATION_USERPWD_LENGTH=12
-  - APPLICATION_LIMIT_REG=1000 per day
-  - APPLICATION_LIMIT_AUTH=1000 per day
-  - APPLICATION_LIMIT_RESTORE=1000 per day
-  - APPLICATION_LIMIT_PER_SEC=5000000 per second
-  - APPLICATION_LIMIT_PER_MIN=5000000 per minute
+  - APPLICATION_LIMIT_REG="1000 per day"
+  - APPLICATION_LIMIT_AUTH="1000 per day"
+  - APPLICATION_LIMIT_RESTORE="1000 per day"
+  - APPLICATION_LIMIT_PER_SEC="5000000 per second"
+  - APPLICATION_LIMIT_PER_MIN="5000000 per minute"
   - APPLICATION_LIMIT_STORAGE_URI=redis://localhost:6379
   - JWT_TOKEN_EXP_DELTA_SECONDS=60
   - JWT_TOKEN_SECRET=secret
@@ -63,8 +62,6 @@ notifications:
     on_success: never
     on_failure: email
 
-before_script:
-  - printenv
 script:
   - coverage run setup.py test
 after_script:

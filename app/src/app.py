@@ -32,7 +32,7 @@ try:
     limiter = Limiter(
         application,
         key_func=get_remote_address,
-        default_limits=["10 per minute", "3 per second"],
+        default_limits=[config.APPLICATION_LIMIT_PER_MIN, config.APPLICATION_LIMIT_PER_SEC],
         headers_enabled=True,
         storage_uri=config.APPLICATION_LIMIT_STORAGE_URI
     )
