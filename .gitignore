@@ -5,3 +5,5 @@
 PyRuc.egg-info/
 /.coverage
 /apidoc/
+/app/.eggs/
+/bin/

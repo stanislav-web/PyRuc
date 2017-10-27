@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-""" EXCHANGE-ACCESS-SERVICE
+""" PyRuc-UAC-SERVICE
     Copyright (C) 2007 Free Software Foundation, Inc.
     Everyone is permitted to copy and distribute verbatim copies of this license document,
     but changing it is not allowed.
@@ -44,6 +44,14 @@ class RedisRepository(RepositoryInterface):
                                         )
         except RedisError as error:
             raise RedisRepositoryError(error)
+
+    def get_instance(self) -> redis.StrictRedis:
+        """
+        Get instance
+        :return: redis.StrictRedis
+        """
+
+        return self.db
 
     def add_reg_code(self, key: str, accept_code: int, ttl: int) -> str:
         """

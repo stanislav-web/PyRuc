@@ -1,9 +1,9 @@
 version: "3.3"
 services:
-  pyrus:
+  app:
       build: ./app
       restart: always
-      container_name: pyrus
+      container_name: app
       env_file:
         - app/env/production.env
       volumes:

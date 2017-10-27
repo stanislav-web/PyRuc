@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-""" EXCHANGE-ACCESS-SERVICE
+""" PyRuc-UAC-SERVICE
     Copyright (C) 2007 Free Software Foundation, Inc.
     Everyone is permitted to copy and distribute verbatim copies of this license document,
     but changing it is not allowed.
@@ -19,6 +19,15 @@ class RepositoryInterface(metaclass=abc.ABCMeta):
         """
 
         super(RepositoryInterface, self).__init__()
+
+    @abc.abstractmethod
+    def get_instance(self):
+        """
+        Get instance
+        :return: redis.StrictRedis
+        """
+
+        pass
 
     @abc.abstractmethod
     def get_user(self, phone: str) -> dict:

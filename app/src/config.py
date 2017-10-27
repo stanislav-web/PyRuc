@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-""" EXCHANGE-ACCESS-SERVICE
+""" PyRuc-UAC-SERVICE
     Copyright (C) 2007 Free Software Foundation, Inc.
     Everyone is permitted to copy and distribute verbatim copies of this license document,
     but changing it is not allowed.
@@ -9,7 +9,7 @@
 
 import os
 
-APPLICATION = os.getenv('APPLICATION', 'pyrus')
+APPLICATION = os.getenv('APPLICATION', 'pyruс')
 APPLICATION_LIMIT_REG = os.getenv('APPLICATION_LIMIT_REG', '100000 per day')
 APPLICATION_LIMIT_AUTH = os.getenv('APPLICATION_LIMIT_AUTH', '100000 per day')
 APPLICATION_LIMIT_RESTORE = os.getenv('APPLICATION_LIMIT_RESTORE', '100000 per day')
@@ -20,7 +20,3 @@ APPLICATION_LIMIT_STORAGE_URI = os.getenv('APPLICATION_LIMIT_STORAGE_URI', 'redi
 LOGSTASH_HOST = os.getenv('LOGSTASH_HOST', '127.0.0.1')
 LOGSTASH_PORT = os.getenv('LOGSTASH_PORT', 6000)
 LOGSTASH_INTERNAL_DB = os.getenv('LOGSTASH_INTERNAL_DB', './logs/log.db')
-
-SERVER_HOST = os.getenv('SERVER_HOST', '0.0.0.0')
-SERVER_PORT = int(os.getenv('SERVER_PORT', '5001'))
-SERVER_DEBUG = os.getenv('SERVER_DEBUG', True)

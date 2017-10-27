@@ -1,0 +1,14 @@
+# .coveragerc to control coverage.py
+[run]
+omit =
+    *__init__*
+branch = true
+cover_pylib = false
+source = src/
+disable_warnings = no-data-collected
+
+[report]
+ignore_errors=True
+omit =
+    *__init__*
+show_missing = false

@@ -16,4 +16,4 @@ RUN pip install -r requirements.txt
 RUN chmod +x server.py
 
 # Set the default command to execute
-CMD [ "python", "./app.py" ]
+ENTRYPOINT ["/usr/local/bin/gunicorn", "--config", "./config.py", "server"]

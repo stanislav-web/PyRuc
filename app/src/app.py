@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-""" EXCHANGE-ACCESS-SERVICE
+""" PyRuc-UAC-SERVICE
     Copyright (C) 2007 Free Software Foundation, Inc.
     Everyone is permitted to copy and distribute verbatim copies of this license document,
     but changing it is not allowed.
@@ -489,13 +489,6 @@ try:
         return make_response(jsonify(
             message=str(errmsg)
         ), HTTPStatus.TOO_MANY_REQUESTS)
-
-
-    server_config = dict({
-        'host': config.SERVER_HOST,
-        'port': config.SERVER_PORT,
-        'debug': config.SERVER_DEBUG
-    })
 
 except Exception as error:
     logging.critical(error)
