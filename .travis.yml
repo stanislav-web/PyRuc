@@ -63,6 +63,8 @@ notifications:
     on_success: never
     on_failure: email
 
+before_script:
+  - printenv
 script:
   - coverage run setup.py test
 after_script:
