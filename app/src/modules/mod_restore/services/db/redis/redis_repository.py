@@ -21,8 +21,8 @@ class RedisRepository(RepositoryInterface):
     REDIS_PORT = int(os.getenv('REDIS_PORT', 6379))
     REDIS_DBNO = int(os.getenv('REDIS_DBNO', 2))
     REDIS_PASSWORD = os.getenv('REDIS_PASSWORD', None)
-    REDIS_SOCKET_TIMEOUT = os.getenv('REDIS_SOCKET_TIMEOUT', 10)
-    REDIS_SOCKET_CONNECT_TIMEOUT = os.getenv('REDIS_SOCKET_CONNECT_TIMEOUT', 3)
+    REDIS_SOCKET_TIMEOUT = int(os.getenv('REDIS_SOCKET_TIMEOUT', 10))
+    REDIS_SOCKET_CONNECT_TIMEOUT = int(os.getenv('REDIS_SOCKET_CONNECT_TIMEOUT', 3))
     REDIS_MAX_CONNECTIONS = int(os.getenv('REDIS_MAX_CONNECTIONS', 3))
 
     def __init__(self):
