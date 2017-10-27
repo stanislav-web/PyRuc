@@ -22,10 +22,6 @@ dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
 load_dotenv(dotenv_path, verbose=True)
 
 
-class DevNull(object):
-    def write(self, data):
-        pass
-
 class ModAuthenticationTestCase(unittest.TestCase):
     """ ModAuthenticationTestCase class """
 
@@ -57,8 +53,6 @@ class ModAuthenticationTestCase(unittest.TestCase):
     def setUp(self):
         application.testing = True
         self.app = application.test_client()
-        self.old_stderr = sys.stderr
-        sys.stderr = DevNull()
 
     def test_0_authentication_ok(self):
 
@@ -118,4 +112,4 @@ class ModAuthenticationTestCase(unittest.TestCase):
         self.assertTrue(isinstance(rdict.get('message'), str))
 
     def tearDown(self):
-        sys.stderr = self.old_stderr
+        pass
