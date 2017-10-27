@@ -264,7 +264,6 @@ try:
             return forbidden(e.message)
         except Exception as e:
             logging.critical(e)
-            print(e)
             return service_unavailable()
 
 
@@ -341,7 +340,6 @@ try:
             return not_found(e.message)
         except (restore.RestoreUnavailableError, Exception) as e:
             logging.critical(e)
-            print(e)
             return service_unavailable()
 
 
@@ -413,7 +411,6 @@ try:
             return bad_request(e.message)
         except (restore.RestoreUnavailableError, Exception) as e:
             logging.critical(e)
-            print(e)
             return service_unavailable()
 
 
