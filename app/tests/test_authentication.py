@@ -35,13 +35,14 @@ class ModAuthenticationTestCase(unittest.TestCase):
         ))
         rdict = json.loads(res1.data.decode())
         message = rdict.get('message')
+
         res2 = self.app.post('/registration/s2', data=dict(
             phone=os.getenv('TEST_PHONE_NO'),
-            code=message['code']
+            code=message.get('code')
         ))
         rdict = json.loads(res2.data.decode())
         message = rdict.get('message')
-        self.password = message['password']
+        self.password = message.get('password')
 
 
     @classmethod

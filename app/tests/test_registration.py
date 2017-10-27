@@ -79,7 +79,7 @@ class ModRegistrationTestCase(unittest.TestCase):
         message = rdict.get('message')
         res2 = self.app.post('/registration/s2', data=dict(
             phone=os.getenv('TEST_PHONE_NO'),
-            code=message['code']
+            code=message.get('code')
         ))
         self.assertEqual(os.getenv('TEST_EXPECTED_CTYPE'), res1.content_type)
         self.assertTrue(isinstance(res1.data, bytes))

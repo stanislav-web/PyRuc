@@ -37,7 +37,7 @@ class ModRestoreTestCase(unittest.TestCase):
         message = rdict.get('message')
         self.app.post('/registration/s2', data=dict(
             phone=os.getenv('TEST_PHONE_NO'),
-            code=message['code']
+            code=message.get('code')
         ))
 
     @classmethod
@@ -104,7 +104,7 @@ class ModRestoreTestCase(unittest.TestCase):
         message = rdict.get('message')
         res2 = self.app.post('/restore/s2', data=dict(
             phone=os.getenv('TEST_PHONE_NO'),
-            code=message['code']
+            code=message.get('code')
         ))
 
         self.assertEqual(HTTPStatus.CREATED, res2.status_code)
