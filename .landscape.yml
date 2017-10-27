@@ -15,6 +15,7 @@ ignore-paths:
   - apidoc
   - bin
   - redis
+  - images
 python-targets:
   - 3
 uses:
