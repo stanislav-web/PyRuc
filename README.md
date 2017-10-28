@@ -16,9 +16,15 @@
 - Redis >= 4
 
 ##### Installation
-- Docker (under development)
+- Docker
 ```bash
-docker-compose up --build
+
+# ENV development: using /app/env/development.env
+docker-compose --file docker-compose.dev.yml up --build
+
+# ENV production: using /app/env/production.env
+docker-compose --file docker-compose.prod.yml up --build
+
 ```
 - Pip dependencies
 ```bash
@@ -29,7 +35,7 @@ pip install -r requirements.txt
 
 #### Run
 ```bash
-gunicorn -c config.py server
+gunicorn -c config.py server --reload
 ```
 
 #### Tests

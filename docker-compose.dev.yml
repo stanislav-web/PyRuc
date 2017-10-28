@@ -5,20 +5,19 @@ services:
       restart: always
       container_name: app
       env_file:
-        - app/env/development.env
+        - ./app/env/development.env
       volumes:
         - ./app:/app
       links:
           - redis
       ports:
-          - "5000:5000"
+          - "5001:5001"
   redis:
     build: ./redis
-    restart: always
+    restart: on-failure
     container_name: redis
     volumes:
         - ./redis/config/redis.conf:/usr/local/etc/redis/redis.conf
-        - ./redis/logs:/var/log/redis/
         - ./redis/data:/var/lib/redis
     ports:
         - "6379:6379"

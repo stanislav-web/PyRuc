@@ -9,7 +9,8 @@
 
 import sys
 import logging
-from logstash_async.handler import AsynchronousLogstashHandler
+import logstash
+
 from flask import Flask, request, make_response, jsonify
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -19,13 +20,10 @@ from .modules import mod_registration as reguser
 from .modules import mod_authentication as authuser
 from .modules import mod_restore as restore
 
-logger = logging.getLogger('python-logstash-logger')
-logger.setLevel(logging.INFO)
-logger.addHandler(AsynchronousLogstashHandler(
-    config.LOGSTASH_HOST,
-    config.LOGSTASH_PORT,
-    config.LOGSTASH_INTERNAL_DB
-))
+logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
+logger = logging.getLogger(config.APPLICATION)
+logger.setLevel(config.APPLICATION_LOG_LEVEL)
+logger.addHandler(logstash.TCPLogstashHandler(config.LOGSTASH_HOST, config.LOGSTASH_PORT, version=1))
 
 try:
     application = Flask(config.APPLICATION)
@@ -103,13 +101,16 @@ try:
                 message=message
             ), HTTPStatus.CREATED)
         except reguser.RegistrationRequestError as e:
-            logging.exception(e)
+            logger.error(e, extra={'status': HTTPStatus.BAD_REQUEST})
             return bad_request(e.message)
         except reguser.RegistrationConflictError as e:
-            logging.exception(e)
+            logger.error(e, extra={'status': HTTPStatus.CONFLICT})
             return conflict(e.message)
-        except (reguser.RegistrationUnavailableError, Exception) as e:
-            logging.critical(e)
+        except reguser.RegistrationUnavailableError as e:
+            logger.critical(e, extra={'status': HTTPStatus.SERVICE_UNAVAILABLE})
+            return service_unavailable()
+        except Exception as e:
+            logger.critical(e, extra={'status': HTTPStatus.INTERNAL_SERVER_ERROR})
             return service_unavailable()
 
 
@@ -177,10 +178,13 @@ try:
                 message=message
             ), HTTPStatus.CREATED)
         except reguser.RegistrationRequestError as e:
-            logging.exception(e)
+            logger.error(e, extra={'status': HTTPStatus.BAD_REQUEST})
             return bad_request(e.message)
-        except (reguser.RegistrationUnavailableError, Exception) as e:
-            logging.critical(e)
+        except reguser.RegistrationUnavailableError as e:
+            logger.critical(e, extra={'status': HTTPStatus.SERVICE_UNAVAILABLE})
+            return service_unavailable()
+        except Exception as e:
+            logger.critical(e, extra={'status': HTTPStatus.INTERNAL_SERVER_ERROR})
             return service_unavailable()
 
 
@@ -254,16 +258,19 @@ try:
                 message=message
             ), HTTPStatus.OK)
         except authuser.AuthenticationRequestError as e:
-            logging.exception(e)
+            logger.error(e, extra={'status': HTTPStatus.BAD_REQUEST})
             return bad_request(e.message)
         except authuser.AuthenticationNotFoundError as e:
-            logging.error(e)
+            logger.error(e, extra={'status': HTTPStatus.NOT_FOUND})
             return not_found(e.message)
         except authuser.AuthenticationForbiddenError as e:
-            logging.error(e)
+            logger.error(e, extra={'status': HTTPStatus.FORBIDDEN})
             return forbidden(e.message)
+        except authuser.AuthenticationNotAvailableError as e:
+            logger.critical(e, extra={'status': HTTPStatus.SERVICE_UNAVAILABLE})
+            return service_unavailable()
         except Exception as e:
-            logging.critical(e)
+            logger.critical(e, extra={'status': HTTPStatus.INTERNAL_SERVER_ERROR})
             return service_unavailable()
 
 
@@ -333,13 +340,16 @@ try:
                 message=message
             ), HTTPStatus.CREATED)
         except restore.RestoreRequestError as e:
-            logging.exception(e)
+            logger.error(e, extra={'status': HTTPStatus.BAD_REQUEST})
             return bad_request(e.message)
         except restore.RestoreNotFoundError as e:
-            logging.exception(e)
+            logger.error(e, extra={'status': HTTPStatus.NOT_FOUND})
             return not_found(e.message)
-        except (restore.RestoreUnavailableError, Exception) as e:
-            logging.critical(e)
+        except restore.RestoreUnavailableError as e:
+            logger.critical(e, extra={'status': HTTPStatus.SERVICE_UNAVAILABLE})
+            return service_unavailable()
+        except Exception as e:
+            logger.critical(e, extra={'status': HTTPStatus.INTERNAL_SERVER_ERROR})
             return service_unavailable()
 
 
@@ -407,10 +417,13 @@ try:
                 message=message
             ), HTTPStatus.CREATED)
         except restore.RestoreRequestError as e:
-            logging.exception(e)
+            logger.error(e, extra={'status': HTTPStatus.FORBIDDEN})
             return bad_request(e.message)
-        except (restore.RestoreUnavailableError, Exception) as e:
-            logging.critical(e)
+        except restore.RestoreUnavailableError as e:
+            logger.exception(e, extra={'status': HTTPStatus.SERVICE_UNAVAILABLE})
+            return service_unavailable()
+        except Exception as e:
+            logger.critical(e, extra={'status': HTTPStatus.INTERNAL_SERVER_ERROR})
             return service_unavailable()
 
 
@@ -491,5 +504,5 @@ try:
         ), HTTPStatus.TOO_MANY_REQUESTS)
 
 except Exception as error:
-    logging.critical(error)
+    logger.critical(error)
     sys.exit(error)

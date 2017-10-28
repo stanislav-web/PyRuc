@@ -8,4 +8,5 @@
 """
 
 from .index import login
-from .exceptions import AuthenticationRequestError, AuthenticationNotFoundError, AuthenticationForbiddenError
+from .exceptions import AuthenticationNotAvailableError, AuthenticationRequestError, \
+                        AuthenticationNotFoundError, AuthenticationForbiddenError

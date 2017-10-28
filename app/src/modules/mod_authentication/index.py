@@ -12,7 +12,8 @@ from .schema import User, UserSchema, UserSchemaError
 from .services.response import NotFoundError, ForbiddenError
 from .services.db import RepositoryError
 from .services.db.redis import RedisRepository
-from .exceptions import AuthenticationRequestError, AuthenticationNotFoundError, AuthenticationForbiddenError
+from .exceptions import AuthenticationNotAvailableError, AuthenticationRequestError, \
+    AuthenticationNotFoundError, AuthenticationForbiddenError
 
 
 def login(credentials: dict) -> dict:
@@ -31,8 +32,10 @@ def login(credentials: dict) -> dict:
 
         token = Authentication.auth(User, UserSchema(), RedisRepository(), result.get('phone'), result.get('password'))
         return token
-    except (UserSchemaError, RepositoryError) as error:
+    except UserSchemaError as error:
         raise AuthenticationRequestError(error.message)
+    except RepositoryError as error:
+        raise AuthenticationNotAvailableError(error.message)
     except NotFoundError as error:
         raise AuthenticationNotFoundError(error.message)
     except ForbiddenError as error:

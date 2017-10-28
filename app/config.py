@@ -12,6 +12,9 @@ from multiprocessing import cpu_count
 
 SERVER_HOST = os.getenv('SERVER_HOST', '0.0.0.0')
 SERVER_PORT = int(os.getenv('SERVER_PORT', '5001'))
+APPLICATION = os.getenv('APPLICATION', 'PyRuc:DEVELOPMENT')
+
+print('\033[32m'+"{app}".format(app=APPLICATION))
 
 #
 # Server socket

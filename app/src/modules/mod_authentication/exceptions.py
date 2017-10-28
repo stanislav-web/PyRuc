@@ -54,3 +54,19 @@ class AuthenticationForbiddenError(Exception):
         self.message = message
 
         super(AuthenticationForbiddenError, self).__init__(message)
+
+
+class AuthenticationNotAvailableError(Exception):
+    """AuthenticationNotAvailableError class"""
+
+    def __init__(self, message):
+        """
+        Error message
+        :param message: message
+        :return: None
+        """
+
+        self.type = AuthenticationNotAvailableError.__class__.__name__
+        self.message = message
+
+        super(AuthenticationNotAvailableError, self).__init__(message)

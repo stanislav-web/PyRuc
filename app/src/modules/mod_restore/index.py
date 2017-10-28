@@ -39,11 +39,11 @@ def step_one(credentials: dict) -> dict:
 
         return {'code': sms_code}
 
-    except (UserSchemaError, RepositoryError) as error:
+    except UserSchemaError as error:
         raise RestoreRequestError(error.message)
     except NotFoundError as error:
         raise RestoreNotFoundError(error.message)
-    except SmsGatewayError as error:
+    except (SmsGatewayError, RepositoryError) as error:
         raise RestoreUnavailableError(error.message)
 
 
@@ -66,7 +66,7 @@ def step_two(credentials: dict) -> dict:
         user = Restore.update_user_password(User, UserSchemaDump(), RedisRepository(), user_id, result.get('phone'))
         return user
 
-    except (UserSchemaError, RepositoryError) as error:
+    except UserSchemaError as error:
         raise RestoreRequestError(error.message)
-    except SmsGatewayError as error:
+    except (SmsGatewayError, RepositoryError) as error:
         raise RestoreUnavailableError(error.message)

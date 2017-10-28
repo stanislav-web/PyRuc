@@ -17,7 +17,7 @@ from .exceptions import RedisRepositoryError
 class RedisRepository(RepositoryInterface):
     """RedisRepository class"""
 
-    REDIS_HOST = os.getenv('REDIS_HOST', 'localhost')
+    REDIS_HOST = os.getenv('REDIS_HOST', '0.0.0.0')
     REDIS_PORT = int(os.getenv('REDIS_PORT', 6379))
     REDIS_DBNO = int(os.getenv('REDIS_DBNO', 2))
     REDIS_PASSWORD = os.getenv('REDIS_PASSWORD', None)

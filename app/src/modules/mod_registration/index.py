@@ -39,11 +39,11 @@ def step_one(credentials: dict) -> dict:
 
         return {'code': sms_code}
 
-    except (UserSchemaError, RepositoryError) as error:
+    except UserSchemaError as error:
         raise RegistrationRequestError(error.message)
     except ConflictError as error:
         raise RegistrationConflictError(error.message)
-    except SmsGatewayError as error:
+    except (SmsGatewayError, RepositoryError) as error:
         raise RegistrationUnavailableError(error.message)
 
 
@@ -65,7 +65,7 @@ def step_two(credentials: dict) -> dict:
         user = Registration.create_user(User, UserSchemaDump(), RedisRepository(), result.get('phone'))
         return user
 
-    except (UserSchemaError, RepositoryError) as error:
+    except UserSchemaError as error:
         raise RegistrationRequestError(error.message)
-    except SmsGatewayError as error:
+    except (SmsGatewayError, RepositoryError) as error:
         raise RegistrationUnavailableError(error.message)

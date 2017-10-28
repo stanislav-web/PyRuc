@@ -7,7 +7,7 @@ FROM python:3.6
 
 MAINTAINER Stanislav WEB "stanisov@gmail.com"
 
-COPY ./app /app
+COPY . /app
 
 WORKDIR /app
 
@@ -15,5 +15,7 @@ WORKDIR /app
 RUN pip install -r requirements.txt
 RUN chmod +x server.py
 
+EXPOSE 5001
+
 # Set the default command to execute
-ENTRYPOINT ["/usr/local/bin/gunicorn", "--config", "./config.py", "server"]
+ENTRYPOINT ["/usr/local/bin/gunicorn", "--config", "./config.py", "server", "--reload"]
