@@ -1,7 +1,8 @@
 ### PyRuc is the service for maintaining user accounts (UAC)
 [![Coverage Status](https://coveralls.io/repos/github/stanislav-web/PyRuc/badge.svg?branch=master)](https://coveralls.io/github/stanislav-web/PyRuc?branch=master) [![Code Health](https://landscape.io/github/stanislav-web/PyRuc/master/landscape.svg?style=flat)](https://landscape.io/github/stanislav-web/PyRuc/master) [![GitHub license](https://img.shields.io/github/license/stanislav-web/PyRuc.svg)](https://github.com/stanislav-web/PyRuc/blob/master/LICENSE)
 
-
+|  Python | Status |
+|:-:|:-:|
 |3.5|[![Build Status](https://travis-ci.org/stanislav-web/PyRuc.svg?branch=master)](https://travis-ci.org/stanislav-web/PyRuc) |
 |3.6|[![Build Status](https://travis-ci.org/stanislav-web/PyRuc.svg?branch=master)](https://travis-ci.org/stanislav-web/PyRuc) |
 
