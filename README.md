@@ -1,5 +1,5 @@
 ### PyRuc is the service for maintaining user accounts (UAC)
-[![Coverage Status](https://coveralls.io/repos/github/stanislav-web/PyRuc/badge.svg?branch=master)](https://coveralls.io/github/stanislav-web/PyRuc?branch=master) [![Code Health](https://landscape.io/github/stanislav-web/PyRuc/master/landscape.svg?style=flat)](https://landscape.io/github/stanislav-web/PyRuc/master) [![GitHub license](https://img.shields.io/github/license/stanislav-web/PyRuc.svg)](https://github.com/stanislav-web/PyRuc/blob/master/LICENSE)
+[![Coverage Status](https://coveralls.io/repos/github/stanislav-web/PyRuc/badge.svg?branch=master)](https://coveralls.io/github/stanislav-web/PyRuc?branch=master) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/810e623b6db74357ba10915f4247aa6d)](https://www.codacy.com/app/stanisov/PyRuc?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=stanislav-web/PyRuc&amp;utm_campaign=Badge_Grade) [![GitHub license](https://img.shields.io/github/license/stanislav-web/PyRuc.svg)](https://github.com/stanislav-web/PyRuc/blob/master/LICENSE)
 
 |  Python | Status |
 |:-:|:-:|
@@ -7,13 +7,22 @@
 |3.6|[![Build Status](https://travis-ci.org/stanislav-web/PyRuc.svg?branch=master)](https://travis-ci.org/stanislav-web/PyRuc) |
 
 ##### What do you get out of the box?
-- Registration and maintenance in mode of persistent storage use
+- User's account maintenance in mode of persistent storage use
 - Granting access to your internal services
 - Rapid recovery access in case of loss of control
 
 ##### Requirements
 - Python >= 3.5
 - Redis >= 4
+
+##### Implemented
+- Gunicorn WSGI
+- Gevent as default async worker for Gunicorn
+- Python flask
+- Twilio SMS notifier
+- ELK client for as log transport
+- JWT authentication
+- Redis as persistent user's storage
 
 ##### Installation
 - Docker
@@ -26,23 +35,21 @@ docker-compose --file docker-compose.dev.yml up --build
 docker-compose --file docker-compose.prod.yml up --build
 
 ```
-- Pip dependencies
+- Manualy & Run
 ```bash
 pip install -r requirements.txt
+gunicorn -c config.py server --reload
 ```
 ##### Try API
 [http://drunk-start.surge.sh](http://drunk-start.surge.sh)
 
-#### Run
-```bash
-gunicorn -c config.py server --reload
-```
+
+##### Diagrams
+![Registration](images/registration.png)
+![Authentication](images/authentication.png)
+![Restore](images/restore.png)
 
 #### Tests
 ```bash
 cd app && coverage run setup.py test
 ```
-
-![restfull](images/restfull.png)
-
-![Python3](images/python3.png) ![Flask](images/flask.png) ![Redis](images/redis.png) ![JWT](images/jwt.png) ![Twillio](images/twilio.png)

@@ -8,3 +8,4 @@ PyRuc.egg-info/
 /app/.eggs/
 /bin/
 /clear.sh
+/apidoc.json
