@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-""" PyRuc-UAC-SERVICE
+""" PyRuc-Python Redis Users Controller
     Copyright (C) 2007 Free Software Foundation, Inc.
     Everyone is permitted to copy and distribute verbatim copies of this license document,
     but changing it is not allowed.
@@ -23,7 +23,11 @@ from .modules import mod_restore as restore
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 logger = logging.getLogger(config.APPLICATION)
 logger.setLevel(config.APPLICATION_LOG_LEVEL)
-logger.addHandler(logstash.TCPLogstashHandler(config.LOGSTASH_HOST, config.LOGSTASH_PORT, version=1))
+logger.addHandler(logstash.TCPLogstashHandler(config.LOGSTASH_HOST,
+                                              config.LOGSTASH_PORT,
+                                              message_type=config.LOGSTASH_NODENAME,
+                                              fqdn=True,
+                                              version=1))
 
 try:
     application = Flask(config.APPLICATION)

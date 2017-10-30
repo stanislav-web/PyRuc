@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-""" PyRuc-UAC-SERVICE
+""" PyRuc-Python Redis Users Controller
     Copyright (C) 2007 Free Software Foundation, Inc.
     Everyone is permitted to copy and distribute verbatim copies of this license document,
     but changing it is not allowed.
@@ -18,4 +18,5 @@ APPLICATION_LIMIT_PER_SEC = os.getenv('APPLICATION_LIMIT_PER_SEC', '100000 per s
 APPLICATION_LIMIT_PER_MIN = os.getenv('APPLICATION_LIMIT_PER_MIN', '100000 per minute')
 APPLICATION_LIMIT_STORAGE_URI = os.getenv('APPLICATION_LIMIT_STORAGE_URI', 'redis://127.0.0.1:6379')
 LOGSTASH_HOST = os.getenv('LOGSTASH_HOST', '127.0.0.1')
-LOGSTASH_PORT = os.getenv('LOGSTASH_PORT', 6000)
+LOGSTASH_PORT = int(os.getenv('LOGSTASH_PORT', 6000))
+LOGSTASH_NODENAME = os.getenv('LOGSTASH_NODENAME', 'pyruc')
