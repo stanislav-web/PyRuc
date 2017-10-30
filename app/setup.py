@@ -11,7 +11,10 @@
 from setuptools import setup, find_packages
 
 VERSION = '1.0.0'
-LONG_DESCRIPTION = open('../README.md').read()
+try:
+    LONG_DESCRIPTION = open('../README.md').read()
+except FileNotFoundError:
+    LONG_DESCRIPTION = 'Docker build images in progress...'
 
 setup(name='PyRuc',
 

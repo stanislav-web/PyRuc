@@ -1,7 +1,10 @@
 version: "3.3"
 services:
   app:
-      build: ./app
+      build:
+        context: ./app
+        args:
+          SERVERMODE : "--reload"
       restart: always
       container_name: app
       env_file:
@@ -9,15 +12,18 @@ services:
       volumes:
         - ./app:/app
       links:
-          - redis
+          - redis_db
       ports:
           - "5000:5000"
-  redis:
-    build: ./redis
+  redis_db:
+    build:
+      context: ./redis
+      args:
+        ENVMODE : prod
     restart: always
-    container_name: redis
+    container_name: redis_db
     volumes:
-        - ./redis/config/redis.conf:/usr/local/etc/redis/redis.conf
+        - ./redis/config/redis-prod.conf:/usr/local/etc/redis/redis.conf
         - ./redis/data:/var/lib/redis
     ports:
         - "6379:6379"

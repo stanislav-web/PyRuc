@@ -10,6 +10,8 @@ MAINTAINER Stanislav WEB "stanisov@gmail.com"
 # or UNIX socket.
 #################################################
 
-COPY ./config/redis.conf /usr/local/etc/redis/redis.conf
+ARG ENVMODE
+
+COPY ./config/redis-$ENVMODE.conf /usr/local/etc/redis/redis.conf
 EXPOSE 6379
 CMD [ "redis-server", "/usr/local/etc/redis/redis.conf"]

@@ -13,13 +13,8 @@ import json
 import sys
 
 from http import HTTPStatus
-from dotenv import load_dotenv
 from src import application
 from src.modules.mod_restore.services.db.redis import RedisRepository
-
-
-dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
-load_dotenv(dotenv_path, verbose=True)
 
 
 class DevNull(object):

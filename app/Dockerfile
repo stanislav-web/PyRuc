@@ -7,15 +7,18 @@ FROM python:3.6
 
 MAINTAINER Stanislav WEB "stanisov@gmail.com"
 
+ARG SERVERMODE
+
 COPY . /app
 
 WORKDIR /app
 
 # Install requirements
 RUN pip install -r requirements.txt
+RUN pip install -r requirements-dev.txt
 RUN chmod +x server.py
 
-EXPOSE 5001
+EXPOSE 5000
 
 # Set the default command to execute
-ENTRYPOINT ["/usr/local/bin/gunicorn", "--config", "./config.py", "server", "--reload"]
+ENTRYPOINT ["sh", "./entrypoint.sh", "$SERVERMODE"]
