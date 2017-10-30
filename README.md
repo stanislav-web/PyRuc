@@ -1,6 +1,4 @@
-### PyRuc (Python Redis Users Controller)
-PyRuc is the service for maintaining new and existing users accounts
-
+### PyRuc is the service for maintaining user accounts (UAC)
 [![Coverage Status](https://coveralls.io/repos/github/stanislav-web/PyRuc/badge.svg?branch=master)](https://coveralls.io/github/stanislav-web/PyRuc?branch=master) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/810e623b6db74357ba10915f4247aa6d)](https://www.codacy.com/app/stanisov/PyRuc?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=stanislav-web/PyRuc&amp;utm_campaign=Badge_Grade) [![GitHub license](https://img.shields.io/github/license/stanislav-web/PyRuc.svg)](https://github.com/stanislav-web/PyRuc/blob/master/LICENSE)
 
 |  Python | Status |
@@ -22,37 +20,29 @@ PyRuc is the service for maintaining new and existing users accounts
 - Gevent as default async worker for Gunicorn
 - Python flask
 - Twilio SMS notifier
-- Logstash client as logs filter to Elastic
+- ELK client for as log transport
 - JWT authentication
 - Redis as persistent user's storage
-
-##### Configuration
-```bash
-/app/env/development.env
-/app/env/production.env
-```
-You also could setup your build out of the docker container.
-Please install `dotenv` pip package for realize your custom environments
 
 ##### Installation
 - Docker
 ```bash
 
 # ENV development: using /app/env/development.env
-> docker-compose --file docker-compose.dev.yml up --build
+docker-compose --file docker-compose.dev.yml up --build
 
 # ENV production: using /app/env/production.env
-> docker-compose --file docker-compose.prod.yml up --build
+docker-compose --file docker-compose.prod.yml up --build
+
 ```
 - Manualy & Run
 ```bash
-> cd app 
-> pip install -r requirements.txt
-> gunicorn -c config.py server --reload
+pip install -r requirements.txt
+gunicorn -c config.py server --reload
 ```
-
 ##### Try API
 [http://drunk-start.surge.sh](http://drunk-start.surge.sh)
+
 
 ##### Diagrams
 ![Registration](images/registration.png)
@@ -61,5 +51,5 @@ Please install `dotenv` pip package for realize your custom environments
 
 #### Tests
 ```bash
-> cd app && coverage run setup.py test
+cd app && coverage run setup.py test
 ```

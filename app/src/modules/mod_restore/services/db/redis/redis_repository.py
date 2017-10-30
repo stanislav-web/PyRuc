@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-""" PyRuc-Python Redis Users Controller
+""" PyRuc-UAC-SERVICE
     Copyright (C) 2007 Free Software Foundation, Inc.
     Everyone is permitted to copy and distribute verbatim copies of this license document,
     but changing it is not allowed.
@@ -106,10 +106,10 @@ class RedisRepository(RepositoryInterface):
         """
 
         try:
-            self.get_user_id(phone)
-            return True
-        except TypeError:
-            return False
+            result = self.db.get('phone:{phone}:id'.format(phone=phone))
+            return result is not None
+        except RedisError as error:
+            raise RedisRepositoryError(error)
 
     def update_user(self, user) -> None:
         """
