@@ -2,6 +2,6 @@
   "title": "PyRuc API",
   "version": "1.0.0",
   "description": "Documentation for PyRuc API",
-  "url": "http://localhost:5001",
-  "sampleUrl": "http://localhost:5001"
+  "url": "http://localhost:5000",
+  "sampleUrl": "http://localhost:5000"
 }

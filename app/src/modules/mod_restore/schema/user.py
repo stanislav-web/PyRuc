@@ -39,7 +39,7 @@ class UserSchemaStepOne(Schema):
         required=True,
         validate=[must_be_valid_phone.__get__(object, type(object)),
                   validate.Length(min=MIN, max=MAX,
-                                  error='Length must be between {:d} and {:d}'.format(MIN, MAX)
+                                  error='Phone length must be between {:d} and {:d}'.format(MIN, MAX)
                                   )],
         error_messages={
             'required': 'Phone is required.'

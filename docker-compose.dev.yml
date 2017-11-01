@@ -3,8 +3,6 @@ services:
   app:
       build:
         context: ./app
-        args:
-          SERVERMODE : ""
       restart: always
       container_name: app
       env_file:
@@ -24,6 +22,6 @@ services:
     container_name: redis_db
     volumes:
         - ./redis/config/redis-dev.conf:/usr/local/etc/redis/redis.conf
-        - ./redis/data:/var/lib/redis
+        - ./redis/data:/data
     ports:
         - "6379:6379"

@@ -7,8 +7,6 @@ FROM python:3.6
 
 MAINTAINER Stanislav WEB "stanisov@gmail.com"
 
-ARG SERVERMODE
-
 COPY . /app
 
 WORKDIR /app
@@ -21,4 +19,4 @@ RUN chmod +x server.py
 EXPOSE 5000
 
 # Set the default command to execute
-ENTRYPOINT ["sh", "./entrypoint.sh", "$SERVERMODE"]
+ENTRYPOINT ["sh", "./entrypoint.sh"]
